@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Sensor Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="firebase-config.js"></script>
+  <script defer src="dashboard.js"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet JS -->
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Map Script -->
+  <script defer src="map.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script defer src="auth.js"></script>
+  
+</head>
+<body>
+  <div id="dashboard">
+    <!-- all your existing content like sensor, map, charts, buttons -->
+  </div>
+      
+  <h1>🌐 Real-Time IoT Dashboard for Tree Theft & Wildfire Detection </h1>
+  <h2>🌡️ Live Sensor Readings </h2>
+
+  <div class="sensor-grid">
+
+    <div class="sensor-box">Temperature: <span id="temperature">--</span> °C</div>
+    <div class="sensor-box">Pressure: <span id="pressure">--</span> hPa</div>
+    <div class="sensor-box">Latitude: <span id="latitude">--</span></div>
+    <div class="sensor-box">Longitude: <span id="longitude">--</span></div>
+    <div class="sensor-box">Altitude: <span id="altitude">--</span> m</div>
+    <div class="sensor-box">Acc X: <span id="acc_x">--</span> g</div>
+    <div class="sensor-box">Acc Y: <span id="acc_y">--</span> g</div>
+    <div class="sensor-box">Acc Z: <span id="acc_z">--</span> g</div>
+    <div class="sensor-box">Gyro X: <span id="gyro_x">--</span> °/s</div>
+    <div class="sensor-box">Gyro Y: <span id="gyro_y">--</span> °/s</div>
+    <div class="sensor-box">Gyro Z: <span id="gyro_z">--</span> °/s</div>
+    <div class="sensor-box">Speed: <span id="speed">--</span> km/h</div>
+    <div class="sensor-box">Satellites: <span id="satellites">--</span></div>
+    <div class="sensor-box">HDOP: <span id="hdop">--</span></div>
+    <div class="sensor-box">UTC: <span id="utc">--</span></div>
+
+  </div>
+
+  <h2>📍 Real-Time GPS Location</h2>
+    <div id="map"></div>
+
+  <h2>🚨 Alerts Panel</h2>
+    <div id="alerts"></div>
+
+  <h2>📈 Sensor History Graphs</h2>
+
+    <div class="chart-container">
+        <canvas id="tempChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="pressureChart"></canvas>
+    </div>
+    <!-- Location Graphs -->
+    <div class="chart-container">
+        <canvas id="latChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="lngChart"></canvas>
+    </div>
+    
+    <!-- Altitude and Speed -->
+    <div class="chart-container">
+        <canvas id="altChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="speedChart"></canvas>
+    </div>
+    
+    <!-- Accelerometer (combined X/Y/Z) -->
+    <div class="chart-container">
+        <canvas id="accChart"></canvas>
+    </div>
+    
+    <!-- Gyroscope (combined X/Y/Z) -->
+    <div class="chart-container">
+        <canvas id="gyroChart"></canvas>
+    </div>
+    
+    <!-- Satellites and HDOP -->
+    <div class="chart-container">
+        <canvas id="satChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="hdopChart"></canvas>
+    </div>
+  
+  <h2>⬇️ Export Sensor Data</h2>
+    <button onclick="downloadCSV()">Download CSV</button>
+
+  <h2>😴 Sleep Mode</h2>
+  <button id="sleep-btn" onclick="toggleSleep()">🛌 Sleep Mode: OFF</button>
+
+ 
+  <button onclick="logout()" style="float:right; margin-bottom: 10px;">Logout</button>
+
+</body>
+</html>
